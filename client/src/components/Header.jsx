@@ -30,22 +30,24 @@ export default function Header() {
                 <FaMoon/>
             </Button>
             <Link to='/sign-in'>
-                <Button gradientDuoTone='greenToBlue'>
+                <Button gradientDuoTone='greenToBlue' outline>
                     ورود
                 </Button>
             </Link>
             <Navbar.Toggle/>
         </div>
         <Navbar.Collapse>
-                <Navbar.Link active={path === '/'} as={'div'}>
-                    <Link to='/'>خانه</Link>
+        <div style={{ display: 'flex', gap: '2rem' }}>
+                <Navbar.Link active={path === '/'} as={'div'} >
+                    <Link to='/'>صفحه اصلی </Link>
                 </Navbar.Link>
-                <Navbar.Link active={path === '/about'} as={'div'}>
+                <Navbar.Link active={path === '/about'} as={'div'} >
                     <Link to='/about'>درباره ما</Link>
                 </Navbar.Link>
                 <Navbar.Link active={path === '/projects'} as={'div'}>
                     <Link to='/projects'>پروژه ها</Link>
                 </Navbar.Link>
+                </div>
             </Navbar.Collapse>
     </Navbar>
   )
