@@ -18,6 +18,11 @@ export const signup = async (req, res, next) => {
     })
 
     try {
+        const exsitingUser = await User.findOne({ $or: [{username}, {email} ] })
+
+        if (exsitingUser){
+            return next (errorHandler(400, exsitingUser.username === username ? "این نام کاربری قبلا انتخاب شده! نام دیگری را لطفا وارد کنید" : "این ایمیل قبلا ثبت شده، لطفا ایمیل دیگری را وارد کنید"))
+        }
 
         await newUser.save();
     res.json('signup successful')
