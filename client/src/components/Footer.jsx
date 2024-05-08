@@ -1,7 +1,7 @@
-import React from 'react'
+
 import { Footer } from 'flowbite-react'
 import { Link } from "react-router-dom";
-import {BsInstagram, BsGithub, } from 'react-icons/bs';
+import {BsInstagram} from 'react-icons/bs';
 import { MdEmail } from "react-icons/md";
 import { FaTelegram } from "react-icons/fa";
 
@@ -13,20 +13,20 @@ export default function FooterComponent() {
             <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
                 <div className='mt-5'>
                 <Link to="/" className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white">
-        <span className="px-2 py-1 bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 rounded-lg text-white">
-        Mahdi&#39;s
-        </span>
-            Blog
-        </Link>
+                <span className="px-2 py-1 bg-gradient-to-r from-blue-500 via-green-500     to-blue-500 rounded-lg text-white">
+                    Mahdi&#39;s
+                    </span>
+                        Blog
+                    </Link>
                 </div>
-                <div className="grid grid-cols-2 gap-8 sm: mt-4 sm:grid-cols-3 sm:gap-6">
+                <div className="grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6">
                     <div>
                     <Footer.Title title='درباره ما'/>
                     <Footer.LinkGroup col>
                         <Footer.Link href='https://youtube.com/@reactproject?si=0CNAA95VZ2ZPYyaO'
                         target='_blank'
                         rel='noopener noreferrer'>
-                            مربی آموزشی
+                                مربی آموزشی
                         </Footer.Link>
                         <Footer.Link href='https://youtube.com/@reactproject?si=0CNAA95VZ2ZPYyaO'
                         target='_blank'
@@ -66,9 +66,10 @@ export default function FooterComponent() {
                              کپی رایت
                         </Footer.Link>
                         </Footer.LinkGroup>
+
                         </div>
-                </div>
-            </div>
+                        </div>
+                        </div>
             <Footer.Divider/>
             <div className='w-full sm:flex sm:items-center sm:justify-between'>
                 <Footer.Copyright href='#' by="Mahdi's Blog" year={new Date().getFullYear()}/>
@@ -77,6 +78,8 @@ export default function FooterComponent() {
                     <Footer.Icon href='#' icon={BsInstagram}/>
                     <Footer.Icon href='#' icon={MdEmail}/>
                     <Footer.Icon href='#' icon={FaTelegram}/>
+
+
                 </div>
             </div>
         </div>
