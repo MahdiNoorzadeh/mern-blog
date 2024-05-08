@@ -2,7 +2,8 @@ import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart, SignInSuccess, SignInFailure } from "../redux/user/userSlice";
+import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice";
+import QAuth from "../components/OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({})
@@ -15,7 +16,7 @@ export default function SignIn() {
     const hadnleSubmit = async (e) => {
       e.preventDefault()
       if (!formData.email || !formData.password){
-        return dispatch(SignInFailure('لطفا تمامی فیلد ها پر کنید!'))
+        return dispatch(signInFailure('لطفا تمامی فیلد ها پر کنید!'))
       }
       try {
         dispatch(signInStart())
@@ -26,14 +27,14 @@ export default function SignIn() {
         })
         const data = await res.json()
         if (data.success === false) {
-          dispatch(SignInFailure(data.message))
+          dispatch(signInFailure(data.message))
         }
         if (res.ok){
-          dispatch(SignInSuccess(data))
+          dispatch(signInSuccess(data))
           navigate('/')
         }
       } catch (error) {
-        dispatch(SignInFailure(error.message))
+        dispatch(signInFailure(error.message))
       }
     }
   return (
@@ -74,6 +75,7 @@ export default function SignIn() {
                 'ورود به حساب کاربری'
             )}
           </Button>
+          <QAuth/>
         </form>
         <div className="flex gap-2 text-sm mt-5">
           <span>حساب کابری ندارید؟</span>
