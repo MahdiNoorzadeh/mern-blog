@@ -47,8 +47,8 @@ export default function Header() {
                     }
                     >
                         <Dropdown.Header>
-                            <span className="blog text-sm">@{currentUser.username}</span>
-                            <span className="blog text-sm font-medium truncate">{currentUser.email}</span>
+                            <span className="block text-sm">{currentUser.username}</span>
+                            <span className="block text-sm font-medium truncate">{currentUser.email}</span>
                         </Dropdown.Header>
                         <Link to={'/dashboard?tab=profile'}>
                             <Dropdown.Item>پروفایل</Dropdown.Item>
