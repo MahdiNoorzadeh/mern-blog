@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    height: 100vh;
+}
+
+.ql-editor {
+    font-size: 1.05rem;
+    font-family: sans-serif;
+    direction: rtl;
+}
+
+.ql-container{
+    direction: rtl;
+}
+
+  
