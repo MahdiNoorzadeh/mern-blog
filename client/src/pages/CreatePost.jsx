@@ -81,7 +81,9 @@ export default function CreatePost() {
             <div className="flex flex-col gap-4 sm:flex-row justify-between">
                 <TextInput type="text" placeholder="عنوان" required id='title' className="flex-1" onChange={(e) => setFormData({...formData, title: e.target.value})}/>
                 <Select
-                    onChange={(e) => ({...formData, category: e.target.value})}
+                    onChange={(e) =>
+                        setFormData({ ...formData, category: e.target.value })
+                      }
                 >
                     <option value='uncategorized'>یک دسته بندی انتخاب کنید</option>
                     <option value='programming'>برنامه نویسی</option>
