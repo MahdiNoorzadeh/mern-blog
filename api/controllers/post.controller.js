@@ -64,3 +64,15 @@ export const getposts = async (req, res, next) => {
             next(error)
         }
 }
+
+export const deletepost = async (req, res, next) => {
+    if (!req.user.isAdmin || req.user.id !== req.params.userId){
+        return next (errorHandler(403, 'شما مجوز حذف این خبر را ندارید!'))
+    }
+    try {
+        await Post.findByIdAndDelete(req.params.postId)
+        res.status(200).json('خبر با موفقیت حذف شد')
+    } catch (error) {
+        next(error)
+    }
+}
