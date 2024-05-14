@@ -9,7 +9,10 @@ export const create = async (req, res, next) => {
     if(!req.body.title || !req.body.content) {
         return next(errorHandler(400, 'لطفا تمامی فیلد های مورد نیاز را پر کنید'))
     }
-    const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '-')
+    const slug = req.body.title.toLowerCase()
+    .replace(/[^a-zA-Z0-9\u0600-\u06FF\u0750-\u077F\u0590-\u05FF-]/g, '-')
+    .replace(/-{2,}/g, '-') // Replace multiple dashes with a single dash
+    .replace(/^-|-$/g, ''); // Remove leading and trailing dashes
     const newPost = new Post ({
         ...req.body, slug, 
         userId: req.user.id,
