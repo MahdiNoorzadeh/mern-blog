@@ -19,8 +19,8 @@ export const updateUser = async (req, res, next) => {
     }
 
     if(req.body.username){
-        if (req.body.username.length < 7 || req.body.username.length > 20){
-            return next (errorHandler(400, 'نام کاربری باید حداقل 7 کارکتر و بیشتر از 20 کارکتر نباشد.'))
+        if (req.body.username.length < 2 || req.body.username.length > 20){
+            return next (errorHandler(400, 'نام کاربری باید حداقل 2 کارکتر و بیشتر از 20 کارکتر نباشد.'))
         }
         if(req.body.username.includes(' ')){
             return next (errorHandler(400, 'نام کاربری نمیتواند شامل اسپیس باشد.'))
@@ -28,7 +28,7 @@ export const updateUser = async (req, res, next) => {
         if (req.body.username !== req.body.username.toLowerCase()){
             return next(errorHandler(400, 'نام کاربری باید شامل حروف کوچک باشد'))
         }
-        if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
+        if(!req.body.username.match(/^[a-zA-Z0-9\u0600-\u06FF]+$/)){
             return next (errorHandler(400, 'نام کاربری میتواند فقط شامل اعداد و حروف باشد'))
         }
     }
@@ -110,6 +110,19 @@ export const updateUser = async (req, res, next) => {
             })
 
 
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    export const getUser = async (req, res, next) => {
+        try {
+            const user = await User.findById(req.params.userId)
+            if(!user){
+                return next (errorHandler(404, 'کاربر مورد نظر پیدا نشد، لطفا دوباره تلاش کنید.'))
+            }
+            const {password, ...rest} = user._doc
+            res.status(200).json(rest)
         } catch (error) {
             next(error)
         }
