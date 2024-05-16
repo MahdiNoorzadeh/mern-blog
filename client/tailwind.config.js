@@ -1,5 +1,6 @@
 import flowbite from 'flowbite-react/tailwind';
 import tailwindScrollbar from 'tailwind-scrollbar';
+import lineClamp from '@tailwindcss/line-clamp';
 
 /** @type {import('tailwindcss').Config} */
 export default {
