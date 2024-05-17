@@ -1,4 +1,4 @@
-import Commnet from '../models/comment.model.js'
+import Comment from '../models/comment.model.js'
 import { errorHandler } from '../utlis/error.js'
 
 export const createComment = async (req, res, next) => {
@@ -8,7 +8,7 @@ export const createComment = async (req, res, next) => {
             return next(errorHandler(403, 'شما مجوز ثبت نظر با این حساب کاربری را ندارید!'))
         }
 
-        const newComment = new Commnet ({
+        const newComment = new Comment ({
             content,
             postId,
             userId,
@@ -22,7 +22,7 @@ export const createComment = async (req, res, next) => {
 
 export const getPostComments = async (req, res, next) => {
     try {
-        const comments = await Commnet.find({postId: req.params.postId}).sort({
+        const comments = await Comment.find({postId: req.params.postId}).sort({
             createdAt: -1,
         })
         res.status(200).json(comments)
@@ -74,15 +74,32 @@ export const editComment = async (req, res, next) => {
 
 export const deleteComment = async (req, res, next) =>{
     try {
-        const comment = await Commnet.findById(req.params.commentId)
+        const comment = await Comment.findById(req.params.commentId)
         if(!comment){
             return next(errorHandler(404, 'نظر پیدا نشد'))
         }
         if (comment.userId !== req.user.id && !req.user.isAdmin){
             return next(errorHandler(403, 'شما مجوز حذف این نظر را ندارید'))
         }
-        await Commnet.findByIdAndDelete(req.params.commentId)
+        await Comment.findByIdAndDelete(req.params.commentId)
         res.status(200).json('نظر با موفقیت حذف شد')
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getcomments = async (req, res, next) => {
+    if(!req.user.isAdmin) return next(errorHandler(403, 'شما مجوز دریافت نظر ها رو ندارید'))
+    try {
+        const startIndex = parseInt(req.query.startIndex) || 0
+        const limit = parseInt(req.query.limit) || 9
+        const sortDirection = req.query.sortDirection === 'desc' ? -1 : 1
+        const comments = await Comment.find().sort({createdAt: sortDirection}).skip(startIndex).limit(limit)
+        const totalComments = await Comment.countDocuments()
+        const now = new Date()
+        const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() -1, now.getDate())
+        const lastMonthComments = await Comment.countDocuments({createdAt: {$gte: oneMonthAgo}})
+        res.status(200).json({comments, totalComments, lastMonthComments})
     } catch (error) {
         next(error)
     }
