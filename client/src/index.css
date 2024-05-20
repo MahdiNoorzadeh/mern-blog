@@ -45,8 +45,3 @@ margin: 1.5rem 0;
  .dark .post-content a{
         color: red;
  }
-.english-text{
-    direction: ltr;
-    unicode-bidi: embed;
-    font-family: 'Arial', sans-serif;
-}
