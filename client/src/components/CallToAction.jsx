@@ -11,7 +11,7 @@ export default function CallToAction() {
                 با هر کلیک یک قدم به موفقیت نزدیک تر شو
             </p>
             <Button gradientDuoTone='pinkToOrange' outline className="">
-                <a href="www.linkedin.com/in/mahdi-noorzadeh-7927a1218" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/mahdi-noorzadeh-7927a1218" target="_blank" rel="noopener noreferrer">
                     بزن بریم
                 </a>
             </Button>
